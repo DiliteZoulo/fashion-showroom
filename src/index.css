@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #FAF9F6;
+  --color-cream: #F5F0EB;
+  --color-charcoal: #1A1A1A;
+  --color-smoke: #2D2D2D;
+  --color-silver: #9CA3AF;
+  --color-mist: #E5E5E5;
+  --color-gold: #C8A97E;
+  --color-gold-light: #D4BC96;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-charcoal);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-silver);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-charcoal);
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .hotspot-pulse {
+    animation: hotspot-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes hotspot-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(200, 169, 126, 0.6);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 12px rgba(200, 169, 126, 0);
+      transform: scale(1.1);
+    }
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-smoke) 50%, var(--color-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .line-reveal {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .line-reveal::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .line-reveal:hover::after {
+    transform: scaleX(1);
+  }
+}
